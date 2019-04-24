@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6e8169981f3a209c02284142eeb82dc3",
+    "revision": "8e068f5cd66bace45b18186005bd15f1",
     "url": "/ReactBudget/index.html"
   },
   {
-    "revision": "ef0b885b4c2139345d95",
+    "revision": "9717ef61d6c8b66f8f60",
     "url": "/ReactBudget/static/css/main.584f321a.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ReactBudget/static/js/2.b41502e9.chunk.js"
   },
   {
-    "revision": "ef0b885b4c2139345d95",
-    "url": "/ReactBudget/static/js/main.33f30726.chunk.js"
+    "revision": "9717ef61d6c8b66f8f60",
+    "url": "/ReactBudget/static/js/main.bb4dc724.chunk.js"
   },
   {
     "revision": "c55655acc55370ac3a2b",
