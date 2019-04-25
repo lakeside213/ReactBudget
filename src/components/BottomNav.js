@@ -8,7 +8,8 @@ const styles = {
     root: {
         width: "100%",
         position: "fixed",
-        bottom: 0
+        bottom: 0,
+        marginTop: "8%"
     }
 };
 

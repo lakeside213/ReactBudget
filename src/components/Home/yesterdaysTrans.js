@@ -21,10 +21,6 @@ const styles = theme => ({
     }
 });
 
-function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
-}
-
 function SimpleList(props) {
     const { classes } = props;
     return (

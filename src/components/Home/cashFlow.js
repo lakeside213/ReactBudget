@@ -12,9 +12,7 @@ import Typography from "@material-ui/core/Typography";
 const styles = theme => ({
     root: {
         width: "100%",
-
         margin: "2%",
-        marginBottom: "6%",
         backgroundColor: theme.palette.background.paper
     },
     transDetails: {
@@ -27,10 +25,6 @@ const styles = theme => ({
         color: "#e60000"
     }
 });
-
-function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
-}
 
 function CashFlow(props) {
     const { classes } = props;
