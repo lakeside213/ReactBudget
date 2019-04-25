@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, Component } from "react";
+import Header from "./components/Header";
+import BottomNav from "./components/BottomNav";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Home from "@material-ui/icons/Home";
+import AccountBalance from "@material-ui/icons/AccountBalance";
+import Person from "@material-ui/icons/Person";
+import Money from "@material-ui/icons/AttachMoney";
+
+const pages = [
+    {
+        name: "Home",
+        icon: <Home />
+    },
+    {
+        name: "Accounts",
+        icon: <AccountBalance />
+    },
+    {
+        name: "Budget",
+        icon: <Money />
+    },
+    {
+        name: "Me",
+        icon: <Person />
+    }
+];
+
+class App extends Component {
+    state = {
+        selectedPage: "Home"
+    };
+
+    setPage = (event, selectedPage) => {
+        this.setState({ selectedPage });
+    };
+    render() {
+        const { selectedPage } = this.state;
+        return (
+            <Fragment>
+                <Header pageName={selectedPage} />
+                <BottomNav
+                    pages={pages}
+                    setPage={this.setPage}
+                    value={selectedPage}
+                />
+            </Fragment>
+        );
+    }
 }
 
 export default App;
