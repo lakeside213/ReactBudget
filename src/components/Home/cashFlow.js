@@ -13,7 +13,10 @@ const styles = theme => ({
     root: {
         width: "100%",
         margin: "2%",
-        backgroundColor: theme.palette.background.paper
+        backgroundColor: theme.palette.background.paper,
+        [theme.breakpoints.up("md")]: {
+            width: "70%"
+        }
     },
     transDetails: {
         textAlign: "right"

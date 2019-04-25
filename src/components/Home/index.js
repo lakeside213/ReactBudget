@@ -7,7 +7,10 @@ import { withStyles } from "@material-ui/core/styles";
 const styles = theme => ({
     root: {
         display: "flex",
-        flexWrap: "wrap"
+        flexWrap: "wrap",
+        [theme.breakpoints.up("md")]: {
+            justifyContent: "center"
+        }
     }
 });
 
