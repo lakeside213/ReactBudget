@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from "react";
 import Header from "./components/Header";
 import BottomNav from "./components/BottomNav";
-
+import HomePage from "./components/Home";
 import Home from "@material-ui/icons/Home";
 import AccountBalance from "@material-ui/icons/AccountBalance";
 import Person from "@material-ui/icons/Person";
@@ -39,6 +39,7 @@ class App extends Component {
         return (
             <Fragment>
                 <Header pageName={selectedPage} />
+                <HomePage />
                 <BottomNav
                     pages={pages}
                     setPage={this.setPage}
