@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListSubheader from "@material-ui/core/ListSubheader";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
@@ -22,6 +21,12 @@ const styles = theme => ({
     },
     transDetails: {
         textAlign: "right"
+    },
+    cashIn: {
+        color: "#58a05b"
+    },
+    cashOut: {
+        color: "#e60000"
     }
 });
 
@@ -29,45 +34,61 @@ function SimpleList(props) {
     const { classes } = props;
     return (
         <div className={classes.root}>
-            <List
-                component="div"
-                subheader={
-                    <ListSubheader component="div">
-                        Yesterdays Transactions
-                    </ListSubheader>
-                }
-                dense
-            >
+            <List component="div" dense>
                 <ListItem button>
                     <ListItemText
-                        primary={<Typography variant="h6">Food</Typography>}
-                        secondary="expense"
+                        primary={
+                            <Typography variant="h6">Net assets</Typography>
+                        }
                     />
                     <ListItemSecondaryAction>
                         <ListItemText
                             className={classes.transDetails}
-                            primary={<Typography variant="h6">-$88</Typography>}
-                            secondary="9:00"
+                            primary={
+                                <Typography variant="h6">$8888</Typography>
+                            }
                         />
                     </ListItemSecondaryAction>
                 </ListItem>
                 <Divider />
                 <ListItem button>
                     <ListItemText
-                        primary={<Typography variant="h6">Food</Typography>}
-                        secondary="expense"
+                        primary={<Typography variant="h6">Assets</Typography>}
                     />
                     <ListItemSecondaryAction>
                         <ListItemText
                             className={classes.transDetails}
-                            primary={<Typography variant="h6">-$88</Typography>}
-                            secondary="9:00"
+                            primary={
+                                <Typography
+                                    variant="h6"
+                                    className={classes.cashIn}
+                                >
+                                    $888
+                                </Typography>
+                            }
                         />
                     </ListItemSecondaryAction>
                 </ListItem>
                 <Divider />
                 <ListItem button>
-                    <ListItemText primary={"View all Transactions"} />
+                    <ListItemText
+                        primary={
+                            <Typography variant="h6">Liablties</Typography>
+                        }
+                    />
+                    <ListItemSecondaryAction>
+                        <ListItemText
+                            className={classes.transDetails}
+                            primary={
+                                <Typography
+                                    variant="h6"
+                                    className={classes.cashOut}
+                                >
+                                    $888
+                                </Typography>
+                            }
+                        />
+                    </ListItemSecondaryAction>
                 </ListItem>
             </List>
         </div>

@@ -1,13 +1,9 @@
 import React, { Fragment, Component } from "react";
-import YesterdaysTrans from "./yesterdaysTrans";
-import CashFlow from "./cashFlow";
-import Dialog from "../utils/Dialogs/FullscreenDialog";
-import EditTrans from "./Dialogs/EditTrans";
+import FinancialSummary from "./financialSummary";
 import { withStyles } from "@material-ui/core/styles";
-
+import Account from "./account";
 const styles = theme => ({
     root: {
-        display: "flex",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -19,21 +15,18 @@ const styles = theme => ({
     }
 });
 
-class Home extends Component {
+class Accounts extends Component {
     render() {
         const { classes } = this.props;
         return (
             <Fragment>
                 <div className={classes.root}>
-                    <YesterdaysTrans />
-                    <CashFlow />
-                    <Dialog>
-                        <EditTrans />
-                    </Dialog>
+                    <FinancialSummary />
+                    <Account />
                 </div>
             </Fragment>
         );
     }
 }
 
-export default withStyles(styles)(Home);
+export default withStyles(styles)(Accounts);

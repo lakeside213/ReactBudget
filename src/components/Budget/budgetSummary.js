@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListSubheader from "@material-ui/core/ListSubheader";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
@@ -31,25 +30,26 @@ const styles = theme => ({
     }
 });
 
-function CashFlow(props) {
+function SimpleList(props) {
     const { classes } = props;
     return (
         <div className={classes.root}>
-            <List
-                component="div"
-                subheader={
-                    <ListSubheader component="div">
-                        Income and Expenses
-                    </ListSubheader>
-                }
-                dense
-            >
+            <List component="div" dense>
+                <ListItem>
+                    <ListItemText
+                        primary={
+                            <Typography variant="subtitle2">
+                                How much have you saved?
+                            </Typography>
+                        }
+                    />
+                </ListItem>
+                <Divider />
                 <ListItem button>
                     <ListItemText
                         primary={
                             <Typography variant="h6">Yesterday</Typography>
                         }
-                        secondary="24 Apr"
                     />
                     <ListItemSecondaryAction>
                         <ListItemText
@@ -59,15 +59,7 @@ function CashFlow(props) {
                                     variant="h6"
                                     className={classes.cashIn}
                                 >
-                                    $88
-                                </Typography>
-                            }
-                            secondary={
-                                <Typography
-                                    variant="h6"
-                                    className={classes.cashOut}
-                                >
-                                    -$88
+                                    $8888
                                 </Typography>
                             }
                         />
@@ -77,9 +69,8 @@ function CashFlow(props) {
                 <ListItem button>
                     <ListItemText
                         primary={
-                            <Typography variant="h6">Yesterday</Typography>
+                            <Typography variant="h6">This month</Typography>
                         }
-                        secondary="24 Apr"
                     />
                     <ListItemSecondaryAction>
                         <ListItemText
@@ -89,28 +80,40 @@ function CashFlow(props) {
                                     variant="h6"
                                     className={classes.cashIn}
                                 >
-                                    $88
-                                </Typography>
-                            }
-                            secondary={
-                                <Typography
-                                    variant="h6"
-                                    className={classes.cashOut}
-                                >
-                                    -$88
+                                    $888
                                 </Typography>
                             }
                         />
                     </ListItemSecondaryAction>
                 </ListItem>
                 <Divider />
+                <ListItem button>
+                    <ListItemText
+                        primary={
+                            <Typography variant="h6">This year</Typography>
+                        }
+                    />
+                    <ListItemSecondaryAction>
+                        <ListItemText
+                            className={classes.transDetails}
+                            primary={
+                                <Typography
+                                    variant="h6"
+                                    className={classes.cashOut}
+                                >
+                                    $-888
+                                </Typography>
+                            }
+                        />
+                    </ListItemSecondaryAction>
+                </ListItem>
             </List>
         </div>
     );
 }
 
-CashFlow.propTypes = {
+SimpleList.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(CashFlow);
+export default withStyles(styles)(SimpleList);

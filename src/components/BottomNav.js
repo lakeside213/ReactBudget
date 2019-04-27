@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
@@ -30,7 +31,7 @@ const styles = theme => ({
 class BottomNav extends React.Component {
     render() {
         const { classes, setPage, value } = this.props;
-
+        const fabClassName = classNames(classes.fab, classes.actionWidth);
         return (
             <BottomNavigation
                 value={value}
@@ -50,7 +51,8 @@ class BottomNav extends React.Component {
                     className={classes.actionWidth}
                 />
                 <BottomNavigationAction
-                    className={classes.fab}
+                    className={fabClassName}
+                    value="Add Transaction"
                     icon={
                         <Fab
                             color="primary"
@@ -60,7 +62,6 @@ class BottomNav extends React.Component {
                             <AddIcon />
                         </Fab>
                     }
-                    className={classes.actionWidth}
                 />
                 <BottomNavigationAction
                     label="Budget"
