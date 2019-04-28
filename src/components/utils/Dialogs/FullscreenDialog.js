@@ -18,26 +18,14 @@ function Transition(props) {
 }
 
 class FullScreenDialog extends React.Component {
-    state = {
-        open: false
-    };
-
-    handleClickOpen = () => {
-        this.setState({ open: true });
-    };
-
-    handleClose = () => {
-        this.setState({ open: false });
-    };
-
     render() {
-        const { children } = this.props;
+        const { children, open, dialogToggle } = this.props;
         return (
             <div>
                 <Dialog
                     fullScreen
-                    open={this.state.open}
-                    onClose={this.handleClose}
+                    open={open}
+                    onClose={dialogToggle}
                     TransitionComponent={Transition}
                 >
                     {children}

@@ -95,7 +95,7 @@ function SignIn(props) {
                             component="div"
                             variant="subtitle1"
                             onClick={e => {
-                                setPage(e,"Signup");
+                                setPage(e, "Signup");
                             }}
                         >
                             Sign up?

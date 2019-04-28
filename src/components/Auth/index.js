@@ -7,6 +7,7 @@ class Auth extends Component {
     };
 
     setPage = (event, selectedPage) => {
+        window.scrollTo(0, 0);
         this.setState({ selectedPage });
     };
     getPageContent(pageName) {

@@ -33,7 +33,7 @@ const styles = theme => ({
 });
 
 function SimpleList(props) {
-    const { classes, setPage } = props;
+    const { classes, setPage, dialogToggle } = props;
     return (
         <div className={classes.root}>
             <List component="div" dense>
@@ -56,7 +56,12 @@ function SimpleList(props) {
             </List>
 
             <List component="div" dense>
-                <ListItem button>
+                <ListItem
+                    button
+                    onClick={() => {
+                        dialogToggle();
+                    }}
+                >
                     <ListItemText
                         primary={
                             <Typography variant="subtitle1">
