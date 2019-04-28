@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import Dashboard from "./dashboard";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
@@ -8,6 +8,7 @@ const styles = theme => ({
         flexDirection: "column",
         alignItems: "center",
         padding: "3%"
+
         // flexWrap: "wrap",
         // [theme.breakpoints.up("md")]: {
         //     justifyContent: "center"
@@ -17,8 +18,12 @@ const styles = theme => ({
 
 class Profile extends Component {
     render() {
-        const { classes } = this.props;
-        return <div className={classes.root}>Still in dev</div>;
+        const { classes, setPage } = this.props;
+        return (
+            <div className={classes.root}>
+                <Dashboard setPage={setPage} />
+            </div>
+        );
     }
 }
 
