@@ -12,8 +12,10 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/ChevronLeft";
+import SearchIcon from "@material-ui/icons/Search";
 import countries from "../../utils/countries.json";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import { fade } from "@material-ui/core/styles/colorManipulator";
+import InputBase from "@material-ui/core/InputBase";
 const styles = theme => ({
     root: {
         width: "100%"
@@ -33,49 +35,140 @@ const styles = theme => ({
                 marginTop: "14.5%"
             }
         }
+    },
+    search: {
+        position: "relative",
+        borderRadius: theme.shape.borderRadius,
+        backgroundColor: fade(theme.palette.common.white, 0.15),
+        "&:hover": {
+            backgroundColor: fade(theme.palette.common.white, 0.25)
+        },
+        marginLeft: 0,
+        width: "100%",
+        [theme.breakpoints.up("sm")]: {
+            marginLeft: theme.spacing.unit
+        }
+    },
+    searchIcon: {
+        width: theme.spacing.unit * 9,
+        height: "100%",
+        position: "absolute",
+        pointerEvents: "none",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    inputRoot: {
+        color: "inherit",
+        width: "100%"
+    },
+    inputInput: {
+        paddingTop: theme.spacing.unit,
+        paddingRight: theme.spacing.unit,
+        paddingBottom: theme.spacing.unit,
+        paddingLeft: theme.spacing.unit * 10,
+        transition: theme.transitions.create("width"),
+        width: "100%",
+        [theme.breakpoints.up("sm")]: {
+            width: 120,
+            "&:focus": {
+                width: 200
+            }
+        }
     }
 });
 
-const Flag = ({ src }) => (
-    <div>
-        <LazyLoadImage alt={"l"} height={"50px"} src={src} width={"50px"} />
-    </div>
-);
 class SimpleList extends Component {
     state = {
-        countriesData: []
+        filter: "",
+        countriesData: [],
+        isSearchOpen: false
     };
     componentDidMount() {
         this.setState({ countriesData: countries });
     }
+    toggleSearch = event => {
+        this.setState(prevState => {
+            return { isSearchOpen: !prevState.isSearchOpen };
+        });
+    };
+    handleChange = event => {
+        this.setState({ filter: event.target.value });
+    };
 
     render() {
-        const { countriesData } = this.state;
+        const { filter, countriesData, isSearchOpen } = this.state;
         const { classes, setPage, dialogToggle } = this.props;
+
+        const lowercasedFilter = filter.toLowerCase();
+        const filteredData = countriesData.filter(country => {
+            return Object.keys(country).some(key =>
+                country[key]
+                    .toString()
+                    .toLowerCase()
+                    .includes(lowercasedFilter)
+            );
+        });
         return (
             <div className={classes.root}>
                 <AppBar className={classes.appBar}>
                     <Toolbar>
-                        <IconButton
-                            color="inherit"
-                            aria-label="Close"
-                            onClick={() => {
-                                dialogToggle();
-                            }}
-                        >
-                            <CloseIcon />
-                        </IconButton>
-                        <Typography
-                            variant="h6"
-                            color="inherit"
-                            className={classes.flex}
-                        >
-                            Pick your currency
-                        </Typography>
+                        {isSearchOpen ? (
+                            <Fragment>
+                                <IconButton
+                                    color="inherit"
+                                    aria-label="Close"
+                                    onClick={() => {
+                                        this.toggleSearch();
+                                    }}
+                                >
+                                    <CloseIcon />
+                                </IconButton>
+                                <div className={classes.search}>
+                                    <div className={classes.searchIcon}>
+                                        <SearchIcon />
+                                    </div>
+                                    <InputBase
+                                        placeholder="Search…"
+                                        classes={{
+                                            root: classes.inputRoot,
+                                            input: classes.inputInput
+                                        }}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                            </Fragment>
+                        ) : (
+                            <Fragment>
+                                <IconButton
+                                    color="inherit"
+                                    aria-label="Close"
+                                    onClick={() => {
+                                        dialogToggle();
+                                    }}
+                                >
+                                    <CloseIcon />
+                                </IconButton>
+                                <Typography
+                                    variant="h6"
+                                    color="inherit"
+                                    className={classes.flex}
+                                >
+                                    Pick your currency
+                                </Typography>
+                                <IconButton
+                                    color="inherit"
+                                    onClick={this.toggleSearch}
+                                    aria-label="Close"
+                                >
+                                    <SearchIcon />
+                                </IconButton>{" "}
+                            </Fragment>
+                        )}
                     </Toolbar>
                 </AppBar>
                 <List component="div" dense>
-                    {countriesData.map(country => (
+                    {filteredData.map(country => (
                         <Fragment key={country.name}>
                             <ListItem
                                 button
@@ -86,7 +179,11 @@ class SimpleList extends Component {
                                 }}
                             >
                                 <ListItemIcon>
-                                    <Flag src={country.flag} />
+                                    <img
+                                        src={country.flag}
+                                        className={classes.flag}
+                                        alt={country.name}
+                                    />
                                 </ListItemIcon>
 
                                 <ListItemText
