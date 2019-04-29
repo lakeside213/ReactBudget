@@ -60,7 +60,7 @@ function SignIn(props) {
             <CssBaseline />
             <Paper className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <img src={logo} style={{ height: "35px" }} />
+                    <img src={logo} style={{ height: "35px" }} alt="logo" />
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Sign in

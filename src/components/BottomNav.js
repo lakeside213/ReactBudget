@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
@@ -39,12 +40,16 @@ class BottomNav extends React.Component {
                 className={classes.root}
             >
                 <BottomNavigationAction
+                    component={Link}
+                    to="/"
                     label="Home"
                     value="Home"
                     icon={<Home />}
                     className={classes.actionWidth}
                 />
                 <BottomNavigationAction
+                    component={Link}
+                    to="/accounts"
                     label="Accounts"
                     value="Accounts"
                     icon={<AccountBalance />}
@@ -64,12 +69,16 @@ class BottomNav extends React.Component {
                     }
                 />
                 <BottomNavigationAction
+                    component={Link}
+                    to="/budget"
                     label="Budget"
                     value="Budget"
                     icon={<Money />}
                     className={classes.actionWidth}
                 />
                 <BottomNavigationAction
+                    component={Link}
+                    to="/me"
                     label="Me"
                     value="Me"
                     icon={<Person />}

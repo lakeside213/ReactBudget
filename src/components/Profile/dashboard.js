@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -33,18 +34,18 @@ const styles = theme => ({
 });
 
 function SimpleList(props) {
-    const { classes, setPage, dialogToggle } = props;
+    const { classes, dialogToggle, history } = props;
     return (
         <div className={classes.root}>
             <List component="div" dense>
                 <ListItem
                     button
                     onClick={e => {
-                        setPage(e, "Auth");
+                        history.push("/auth/signin");
                     }}
                 >
                     <ListItemIcon>
-                        <img src={logo} style={{ height: "50px" }} />
+                        <img src={logo} style={{ height: "50px" }} alt="logo" />
                     </ListItemIcon>
 
                     <ListItemText
@@ -80,4 +81,4 @@ SimpleList.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SimpleList);
+export default withRouter(withStyles(styles)(SimpleList));
