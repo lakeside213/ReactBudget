@@ -8,7 +8,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
-
+import ShareIcon from "@material-ui/icons/Share";
 import logo from "../../logo.svg";
 
 const styles = theme => ({
@@ -72,6 +72,42 @@ function SimpleList(props) {
                         secondary="Dollar($)"
                     />
                 </ListItem>
+                {navigator.share ? (
+                    <ListItem
+                        button
+                        onClick={() => {
+                            navigator
+                                .share({
+                                    title: "ReactBudget",
+                                    text: "Check out ReactBudget today",
+                                    url: window.location.href
+                                })
+                                .then(() => {
+                                    console.log("Thanks for sharing!");
+                                })
+                                .catch(err => {
+                                    console.log(
+                                        `Couldn't share because of`,
+                                        err.message
+                                    );
+                                });
+                        }}
+                    >
+                        <ListItemIcon>
+                            <ShareIcon />
+                        </ListItemIcon>
+
+                        <ListItemText
+                            primary={
+                                <Typography variant="subtitle1">
+                                    Share
+                                </Typography>
+                            }
+                        />
+                    </ListItem>
+                ) : (
+                    ""
+                )}
             </List>
         </div>
     );
