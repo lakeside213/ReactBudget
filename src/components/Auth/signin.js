@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -53,13 +54,18 @@ const styles = theme => ({
 });
 
 function SignIn(props) {
-    const { classes, setPage } = props;
+    const { classes, setPage, history } = props;
 
     return (
         <main className={classes.main}>
             <CssBaseline />
             <Paper className={classes.paper}>
-                <Avatar className={classes.avatar}>
+                <Avatar
+                    className={classes.avatar}
+                    onClick={() => {
+                        history.push("/me");
+                    }}
+                >
                     <img src={logo} style={{ height: "35px" }} alt="logo" />
                 </Avatar>
                 <Typography component="h1" variant="h5">
@@ -121,4 +127,4 @@ SignIn.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SignIn);
+export default withRouter(withStyles(styles)(SignIn));
