@@ -9,6 +9,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import ShareIcon from "@material-ui/icons/Share";
+import MoneyIcon from "@material-ui/icons/AttachMoney";
 import logo from "../../logo.svg";
 
 const styles = theme => ({
@@ -63,6 +64,10 @@ function SimpleList(props) {
                         dialogToggle();
                     }}
                 >
+                    <ListItemIcon>
+                        <MoneyIcon />
+                    </ListItemIcon>
+
                     <ListItemText
                         primary={
                             <Typography variant="subtitle1">
@@ -79,8 +84,8 @@ function SimpleList(props) {
                             navigator
                                 .share({
                                     title: "ReactBudget",
-                                    text: "Check out ReactBudget today",
-                                    url: window.location.href
+                                    url:
+                                        "https://lakeside213.github.io/ReactBudget/"
                                 })
                                 .then(() => {
                                     console.log("Thanks for sharing!");
