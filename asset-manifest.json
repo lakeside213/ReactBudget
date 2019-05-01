@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/ReactBudget/static/css/main.19368e15.chunk.css",
-    "main.js": "/ReactBudget/static/js/main.9836a6fe.chunk.js",
-    "main.js.map": "/ReactBudget/static/js/main.9836a6fe.chunk.js.map",
+    "main.js": "/ReactBudget/static/js/main.39dfe08c.chunk.js",
+    "main.js.map": "/ReactBudget/static/js/main.39dfe08c.chunk.js.map",
     "runtime~main.js": "/ReactBudget/static/js/runtime~main.38b7b471.js",
     "runtime~main.js.map": "/ReactBudget/static/js/runtime~main.38b7b471.js.map",
-    "static/js/2.f100d4ce.chunk.js": "/ReactBudget/static/js/2.f100d4ce.chunk.js",
-    "static/js/2.f100d4ce.chunk.js.map": "/ReactBudget/static/js/2.f100d4ce.chunk.js.map",
+    "static/js/2.1d94944a.chunk.js": "/ReactBudget/static/js/2.1d94944a.chunk.js",
+    "static/js/2.1d94944a.chunk.js.map": "/ReactBudget/static/js/2.1d94944a.chunk.js.map",
     "index.html": "/ReactBudget/index.html",
-    "precache-manifest.1792789960389b03fe1186e017c03a16.js": "/ReactBudget/precache-manifest.1792789960389b03fe1186e017c03a16.js",
+    "precache-manifest.8043a7f99568b3d3f5673ea9655b5ce8.js": "/ReactBudget/precache-manifest.8043a7f99568b3d3f5673ea9655b5ce8.js",
     "service-worker.js": "/ReactBudget/service-worker.js",
     "static/css/main.19368e15.chunk.css.map": "/ReactBudget/static/css/main.19368e15.chunk.css.map",
     "static/media/logo.svg": "/ReactBudget/static/media/logo.636a159c.svg"
