@@ -24,7 +24,7 @@ const styles = theme => ({
     },
     actionWidth: {
         [theme.breakpoints.down("xs")]: {
-            minWidth: "65px"
+            minWidth: "49px"
         }
     }
 });

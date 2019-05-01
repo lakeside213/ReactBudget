@@ -13,7 +13,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/ChevronLeft";
 import SearchIcon from "@material-ui/icons/Search";
-import countries from "../../utils/countries.json";
+import LoadingScreen from "../utils/loading";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import InputBase from "@material-ui/core/InputBase";
 const styles = theme => ({
@@ -82,11 +82,23 @@ class SimpleList extends Component {
     state = {
         filter: "",
         countriesData: [],
+        isLoading: true,
         isSearchOpen: false
     };
-    componentDidMount() {
-        this.setState({ countriesData: countries });
+    async componentDidMount() {
+        try {
+            let countries;
+            const res = await fetch(
+                "https://restcountries.eu/rest/v2/all?fields=name;capital;currencies;flag"
+            );
+
+            countries = await res.json();
+            this.setState({ countriesData: countries, isLoading: false });
+        } catch (e) {
+            console.log(e);
+        }
     }
+
     toggleSearch = event => {
         this.setState(prevState => {
             return { isSearchOpen: !prevState.isSearchOpen };
@@ -97,7 +109,7 @@ class SimpleList extends Component {
     };
 
     render() {
-        const { filter, countriesData, isSearchOpen } = this.state;
+        const { filter, countriesData, isSearchOpen, isLoading } = this.state;
         const { classes, setPage, dialogToggle } = this.props;
 
         const lowercasedFilter = filter.toLowerCase();
@@ -109,6 +121,7 @@ class SimpleList extends Component {
                     .includes(lowercasedFilter)
             );
         });
+
         return (
             <div className={classes.root}>
                 <AppBar className={classes.appBar}>
@@ -167,42 +180,46 @@ class SimpleList extends Component {
                         )}
                     </Toolbar>
                 </AppBar>
-                <List component="div" dense>
-                    {filteredData.map(country => (
-                        <Fragment key={country.name}>
-                            <ListItem
-                                button
-                                className={classes.listItem}
-                                onClick={e => {
-                                    dialogToggle();
-                                    setPage(e, "Me");
-                                }}
-                            >
-                                <ListItemIcon>
-                                    <img
-                                        src={country.flag}
-                                        className={classes.flag}
-                                        alt={country.name}
-                                    />
-                                </ListItemIcon>
+                {isLoading ? (
+                    <LoadingScreen />
+                ) : (
+                    <List component="div" dense>
+                        {filteredData.map(country => (
+                            <Fragment key={country.name}>
+                                <ListItem
+                                    button
+                                    className={classes.listItem}
+                                    onClick={e => {
+                                        dialogToggle();
+                                        setPage(e, "Me");
+                                    }}
+                                >
+                                    <ListItemIcon>
+                                        <img
+                                            src={country.flag}
+                                            className={classes.flag}
+                                            alt={country.name}
+                                        />
+                                    </ListItemIcon>
 
-                                <ListItemText
-                                    primary={
-                                        <Typography variant="h6">
-                                            {`${country.name}(${
-                                                country.currencies[0].name
-                                            })`}
-                                        </Typography>
-                                    }
-                                    secondary={`${country.currencies[0].code}(${
-                                        country.currencies[0].symbol
-                                    })`}
-                                />
-                            </ListItem>
-                            <Divider />
-                        </Fragment>
-                    ))}
-                </List>
+                                    <ListItemText
+                                        primary={
+                                            <Typography variant="h6">
+                                                {`${country.name}(${
+                                                    country.currencies[0].name
+                                                })`}
+                                            </Typography>
+                                        }
+                                        secondary={`${
+                                            country.currencies[0].code
+                                        }(${country.currencies[0].symbol})`}
+                                    />
+                                </ListItem>
+                                <Divider />
+                            </Fragment>
+                        ))}
+                    </List>
+                )}
             </div>
         );
     }
