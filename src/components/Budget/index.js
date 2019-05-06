@@ -21,10 +21,8 @@ class Budget extends Component {
         const { classes } = this.props;
         return (
             <Fragment>
-                <div className={classes.root}>
-                    <BudgetSummary />
-                    <BudgetView />
-                </div>
+                <BudgetSummary />
+                <BudgetView />
             </Fragment>
         );
     }

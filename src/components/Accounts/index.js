@@ -20,10 +20,8 @@ class Accounts extends Component {
         const { classes } = this.props;
         return (
             <Fragment>
-                <div className={classes.root}>
-                    <FinancialSummary />
-                    <Account />
-                </div>
+                <FinancialSummary />
+                <Account />
             </Fragment>
         );
     }

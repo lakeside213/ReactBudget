@@ -24,14 +24,12 @@ class Home extends Component {
         const { classes } = this.props;
         return (
             <Fragment>
-                <div className={classes.root}>
-                    {/* <YesterdaysTrans />
+                {/* <YesterdaysTrans />
                     <CashFlow />
                     <Dialog>
                         <EditTrans />
                     </Dialog> */}
-                    <EmptyState />
-                </div>
+                <EmptyState />
             </Fragment>
         );
     }

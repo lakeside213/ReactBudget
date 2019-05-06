@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Dashboard from "./dashboard";
 import { withStyles } from "@material-ui/core/styles";
 import FullScreenDialog from "../utils/Dialogs/FullscreenDialog";
@@ -30,7 +30,7 @@ class Profile extends Component {
         const { dialogOpen } = this.state;
         const { classes, setPage } = this.props;
         return (
-            <div className={classes.root}>
+            <Fragment>
                 <Dashboard setPage={setPage} dialogToggle={this.dialogToggle} />
                 <FullScreenDialog
                     open={dialogOpen}
@@ -41,7 +41,7 @@ class Profile extends Component {
                         dialogToggle={this.dialogToggle}
                     />
                 </FullScreenDialog>
-            </div>
+            </Fragment>
         );
     }
 }
