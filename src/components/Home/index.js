@@ -1,4 +1,6 @@
 import React, { Fragment, Component } from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import YesterdaysTrans from "./yesterdaysTrans";
 import CashFlow from "./cashFlow";
 import Dialog from "../utils/Dialogs/FullscreenDialog";
@@ -21,18 +23,23 @@ const styles = theme => ({
 
 class Home extends Component {
     render() {
-        const { classes } = this.props;
+        const { classes, user } = this.props;
+
         return (
             <Fragment>
-                {/* <YesterdaysTrans />
-                    <CashFlow />
-                    <Dialog>
-                        <EditTrans />
-                    </Dialog> */}
-                <EmptyState />
+                <YesterdaysTrans />
+                <CashFlow />
+                <Dialog>
+                    <EditTrans />
+                </Dialog>
             </Fragment>
         );
     }
 }
-
-export default withStyles(styles)(Home);
+function mapStateToProps({ user }) {
+    return { user };
+}
+export default connect(
+    mapStateToProps,
+    null
+)(withRouter(withStyles(styles)(EmptyState(Home))));

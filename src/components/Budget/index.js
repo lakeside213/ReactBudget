@@ -1,20 +1,11 @@
 import React, { Fragment, Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import BudgetSummary from "./budgetSummary";
 import BudgetView from "./budget";
 import { withStyles } from "@material-ui/core/styles";
-
-const styles = theme => ({
-    root: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: "3%"
-        // flexWrap: "wrap",
-        // [theme.breakpoints.up("md")]: {
-        //     justifyContent: "center"
-        // }
-    }
-});
+import EmptyState from "../utils/EmptyState";
+const styles = theme => ({});
 
 class Budget extends Component {
     render() {
@@ -27,5 +18,10 @@ class Budget extends Component {
         );
     }
 }
-
-export default withStyles(styles)(Budget);
+function mapStateToProps({ user }) {
+    return { user };
+}
+export default connect(
+    mapStateToProps,
+    null
+)(withRouter(withStyles(styles)(EmptyState(Budget))));

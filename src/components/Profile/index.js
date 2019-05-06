@@ -1,21 +1,12 @@
 import React, { Component, Fragment } from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import Dashboard from "./dashboard";
 import { withStyles } from "@material-ui/core/styles";
 import FullScreenDialog from "../utils/Dialogs/FullscreenDialog";
 import SelectCurrency from "./selectCurrency";
-const styles = theme => ({
-    root: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: "3%"
 
-        // flexWrap: "wrap",
-        // [theme.breakpoints.up("md")]: {
-        //     justifyContent: "center"
-        // }
-    }
-});
+const styles = theme => ({});
 
 class Profile extends Component {
     state = {
@@ -45,5 +36,10 @@ class Profile extends Component {
         );
     }
 }
-
-export default withStyles(styles)(Profile);
+function mapStateToProps({ user }) {
+    return { user };
+}
+export default connect(
+    mapStateToProps,
+    null
+)(withRouter(withStyles(styles)(Profile)));

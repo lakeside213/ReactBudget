@@ -19,12 +19,12 @@ function Transition(props) {
 
 class FullScreenDialog extends React.Component {
     render() {
-        const { children, open, dialogToggle } = this.props;
+        const { children, isOpen, dialogToggle } = this.props;
         return (
             <div>
                 <Dialog
                     fullScreen
-                    open={open}
+                    open={isOpen}
                     onClose={dialogToggle}
                     TransitionComponent={Transition}
                 >

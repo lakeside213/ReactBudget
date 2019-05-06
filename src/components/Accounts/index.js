@@ -1,19 +1,11 @@
 import React, { Fragment, Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import FinancialSummary from "./financialSummary";
 import { withStyles } from "@material-ui/core/styles";
 import Account from "./account";
-const styles = theme => ({
-    root: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: "3%"
-        // flexWrap: "wrap",
-        // [theme.breakpoints.up("md")]: {
-        //     justifyContent: "center"
-        // }
-    }
-});
+import EmptyState from "../utils/EmptyState";
+const styles = theme => ({});
 
 class Accounts extends Component {
     render() {
@@ -27,4 +19,10 @@ class Accounts extends Component {
     }
 }
 
-export default withStyles(styles)(Accounts);
+function mapStateToProps({ user }) {
+    return { user };
+}
+export default connect(
+    mapStateToProps,
+    null
+)(withRouter(withStyles(styles)(EmptyState(Accounts))));

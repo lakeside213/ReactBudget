@@ -30,7 +30,7 @@ const styles = theme => ({
 
 class BottomNav extends React.Component {
     render() {
-        const { classes, setPage, value } = this.props;
+        const { classes, setPage, value, user } = this.props;
         const fabClassName = classNames(classes.fab, classes.actionWidth);
         return (
             <BottomNavigation
@@ -54,19 +54,24 @@ class BottomNav extends React.Component {
                     icon={<AccountBalance />}
                     className={classes.actionWidth}
                 />
-                <BottomNavigationAction
-                    className={fabClassName}
-                    value="Add Transaction"
-                    icon={
-                        <Fab
-                            color="primary"
-                            aria-label="Add"
-                            className={classes.fab}
-                        >
-                            <CreateTrans />
-                        </Fab>
-                    }
-                />
+                {user.accounts.lengths > 0 ? (
+                    <BottomNavigationAction
+                        className={fabClassName}
+                        value="Add Transaction"
+                        icon={
+                            <Fab
+                                color="primary"
+                                aria-label="Add"
+                                className={classes.fab}
+                            >
+                                <CreateTrans />
+                            </Fab>
+                        }
+                    />
+                ) : (
+                    ""
+                )}
+
                 <BottomNavigationAction
                     component={Link}
                     to="/budget"
