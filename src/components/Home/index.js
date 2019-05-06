@@ -4,7 +4,7 @@ import CashFlow from "./cashFlow";
 import Dialog from "../utils/Dialogs/FullscreenDialog";
 import EditTrans from "./Dialogs/EditTrans";
 import { withStyles } from "@material-ui/core/styles";
-
+import EmptyState from "../utils/EmptyState";
 const styles = theme => ({
     root: {
         display: "flex",
@@ -25,11 +25,12 @@ class Home extends Component {
         return (
             <Fragment>
                 <div className={classes.root}>
-                    <YesterdaysTrans />
+                    {/* <YesterdaysTrans />
                     <CashFlow />
                     <Dialog>
                         <EditTrans />
-                    </Dialog>
+                    </Dialog> */}
+                    <EmptyState />
                 </div>
             </Fragment>
         );

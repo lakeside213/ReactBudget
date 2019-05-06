@@ -10,8 +10,7 @@ import AccountBalance from "@material-ui/icons/AccountBalance";
 import Person from "@material-ui/icons/Person";
 import Money from "@material-ui/icons/AttachMoney";
 import Fab from "@material-ui/core/Fab";
-import AddIcon from "@material-ui/icons/Add";
-
+import CreateTrans from "@material-ui/icons/AccountBalanceWallet";
 const styles = theme => ({
     root: {
         width: "100%",
@@ -64,7 +63,7 @@ class BottomNav extends React.Component {
                             aria-label="Add"
                             className={classes.fab}
                         >
-                            <AddIcon />
+                            <CreateTrans />
                         </Fab>
                     }
                 />
