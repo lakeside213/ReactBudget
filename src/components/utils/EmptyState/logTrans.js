@@ -10,7 +10,8 @@ const styles = theme => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        padding: "3%"
+        padding: "3%",
+        textAlign: "center"
     },
     icon: {
         fontSize: "100px"

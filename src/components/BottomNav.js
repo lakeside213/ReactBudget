@@ -54,7 +54,7 @@ class BottomNav extends React.Component {
                     icon={<AccountBalance />}
                     className={classes.actionWidth}
                 />
-                {user.accounts.lengths > 0 ? (
+                {user.accounts.length > 0 ? (
                     <BottomNavigationAction
                         className={fabClassName}
                         value="Add Transaction"

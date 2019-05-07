@@ -9,6 +9,7 @@ import BudgetPage from "./components/Budget";
 import ProfilePage from "./components/Profile";
 import Signin from "./components/Auth/signin";
 import Signup from "./components/Auth/signup";
+import CreateAccount from "./components/Accounts/Modals/CreateAccount";
 const Auth = ({ routes }) => (
     <div>
         {routes.map(route => (
@@ -94,7 +95,7 @@ class App extends Component {
                     isOpen={isAccountModalOpen}
                     dialogToggle={this.accountModalToggle}
                 >
-                    gg
+                    <CreateAccount />
                 </FullScreenDialog>
             </Router>
         );

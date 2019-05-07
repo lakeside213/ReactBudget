@@ -7,7 +7,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
-
+import Amount, { GREEN, RED } from "../utils/amount";
 const styles = theme => ({
     root: {
         width: "100%",
@@ -21,17 +21,11 @@ const styles = theme => ({
     },
     transDetails: {
         textAlign: "right"
-    },
-    cashIn: {
-        color: "#58a05b"
-    },
-    cashOut: {
-        color: "#e60000"
     }
 });
 
 function SimpleList(props) {
-    const { classes } = props;
+    const { classes, assets } = props;
     return (
         <div className={classes.root}>
             <List component="div" dense>
@@ -45,7 +39,9 @@ function SimpleList(props) {
                         <ListItemText
                             className={classes.transDetails}
                             primary={
-                                <Typography variant="h6">$8888</Typography>
+                                <Typography variant="h6">
+                                    <Amount value={assets} baseCurrency={"$"} />
+                                </Typography>
                             }
                         />
                     </ListItemSecondaryAction>
@@ -59,11 +55,12 @@ function SimpleList(props) {
                         <ListItemText
                             className={classes.transDetails}
                             primary={
-                                <Typography
-                                    variant="h6"
-                                    className={classes.cashIn}
-                                >
-                                    $888
+                                <Typography variant="h6">
+                                    <Amount
+                                        value={assets}
+                                        baseCurrency={"$"}
+                                        color={GREEN}
+                                    />
                                 </Typography>
                             }
                         />

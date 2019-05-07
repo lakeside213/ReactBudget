@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
+import { fetchUser } from "./actions/user";
+import { connect } from "react-redux";
 import Header from "./components/Header";
 import BottomNav from "./components/BottomNav";
 import { withStyles } from "@material-ui/core/styles";
@@ -17,6 +19,7 @@ class Wrapper extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.location !== prevProps.location) {
             window.scrollTo(0, 0);
+            this.props.fetchUser();
         }
     }
 
@@ -41,4 +44,7 @@ class Wrapper extends Component {
     }
 }
 
-export default withStyles(styles)(withRouter(Wrapper));
+export default connect(
+    null,
+    { fetchUser }
+)(withStyles(styles)(withRouter(Wrapper)));

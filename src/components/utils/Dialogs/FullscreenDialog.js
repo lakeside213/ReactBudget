@@ -4,14 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import Slide from "@material-ui/core/Slide";
 
-const styles = {
-    appBar: {
-        position: "relative"
-    },
-    flex: {
-        flex: 1
-    }
-};
+const styles = {};
 
 function Transition(props) {
     return <Slide direction="up" {...props} />;

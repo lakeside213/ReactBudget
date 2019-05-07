@@ -3,7 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import reduxThunk from "redux-thunk";
+import { createStore, applyMiddleware } from "redux";
 import reducers from "./reducers";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import * as serviceWorker from "./serviceWorker";
@@ -18,7 +19,7 @@ const theme = createMuiTheme({
         }
     }
 });
-const store = createStore(reducers);
+const store = createStore(reducers, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
     <Provider store={store}>

@@ -24,7 +24,7 @@ class Profile extends Component {
             <Fragment>
                 <Dashboard setPage={setPage} dialogToggle={this.dialogToggle} />
                 <FullScreenDialog
-                    open={dialogOpen}
+                    isOpen={dialogOpen}
                     dialogToggle={this.dialogToggle}
                 >
                     <SelectCurrency

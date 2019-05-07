@@ -6,7 +6,7 @@ import CashFlow from "./cashFlow";
 import Dialog from "../utils/Dialogs/FullscreenDialog";
 import EditTrans from "./Dialogs/EditTrans";
 import { withStyles } from "@material-ui/core/styles";
-import EmptyState from "../utils/EmptyState";
+import EmptyStateHOC from "../utils/EmptyState";
 const styles = theme => ({
     root: {
         display: "flex",
@@ -42,4 +42,4 @@ function mapStateToProps({ user }) {
 export default connect(
     mapStateToProps,
     null
-)(withRouter(withStyles(styles)(EmptyState(Home))));
+)(withRouter(withStyles(styles)(EmptyStateHOC(Home))));

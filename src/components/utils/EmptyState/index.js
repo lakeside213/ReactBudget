@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { fetchUser } from "../../../actions/user";
 import CreateAccount from "./createAccount";
 import LogTrans from "./logTrans";
@@ -11,11 +12,14 @@ export default ChildComponent => {
         }
 
         render() {
-            const { user } = this.props;
+            const { user, location } = this.props;
             const { transactions, accounts } = user;
             if (accounts.length === 0) {
                 return <CreateAccount />;
-            } else if (transactions.length === 0) {
+            } else if (
+                transactions.length === 0 &&
+                location.pathname !== "/accounts"
+            ) {
                 return <LogTrans />;
             }
             return <ChildComponent {...this.props} />;
@@ -29,5 +33,5 @@ export default ChildComponent => {
     return connect(
         mapStateToProps,
         { fetchUser }
-    )(ComposedComponent);
+    )(withRouter(ComposedComponent));
 };

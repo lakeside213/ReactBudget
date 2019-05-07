@@ -1,14 +1,13 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListSubheader from "@material-ui/core/ListSubheader";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
-
+import Amount, { GREEN, RED } from "../utils/amount";
 const styles = theme => ({
     root: {
         width: "100%",
@@ -32,69 +31,58 @@ const styles = theme => ({
 });
 
 function SimpleList(props) {
-    const { classes } = props;
+    const { classes, name, data } = props;
+    let total = 0;
+    data.forEach(function(account) {
+        total = total + account.amount;
+    });
+
     return (
         <div className={classes.root}>
             <List component="div" dense>
                 <ListItem button>
                     <ListItemText
-                        primary={
-                            <Typography variant="h6">Debit Cards</Typography>
-                        }
+                        primary={<Typography variant="h6">{name}</Typography>}
                     />
                     <ListItemSecondaryAction>
                         <ListItemText
                             className={classes.transDetails}
                             primary={
-                                <Typography variant="h6">$8888</Typography>
+                                <Amount
+                                    value={total}
+                                    baseCurrency={"$"}
+                                    color={GREEN}
+                                />
                             }
                         />
                     </ListItemSecondaryAction>
                 </ListItem>
                 <Divider />
-                <ListItem button>
-                    <ListItemText
-                        primary={
-                            <Typography variant="subtitle1">N26</Typography>
-                        }
-                    />
-                    <ListItemSecondaryAction>
-                        <ListItemText
-                            className={classes.transDetails}
-                            primary={
-                                <Typography
-                                    variant="h6"
-                                    className={classes.cashIn}
-                                >
-                                    $888
-                                </Typography>
-                            }
-                        />
-                    </ListItemSecondaryAction>
-                </ListItem>
-                <Divider />
-                <ListItem button>
-                    <ListItemText
-                        primary={
-                            <Typography variant="subtitle1">
-                                Sparkasse
-                            </Typography>
-                        }
-                    />
-                    <ListItemSecondaryAction>
-                        <ListItemText
-                            className={classes.transDetails}
-                            primary={
-                                <Typography
-                                    variant="h6"
-                                    className={classes.cashIn}
-                                >
-                                    $888
-                                </Typography>
-                            }
-                        />
-                    </ListItemSecondaryAction>
-                </ListItem>
+                {data.map(account => (
+                    <Fragment>
+                        <ListItem button>
+                            <ListItemText
+                                primary={
+                                    <Typography variant="subtitle1">
+                                        {account.name}
+                                    </Typography>
+                                }
+                            />
+                            <ListItemSecondaryAction>
+                                <ListItemText
+                                    className={classes.transDetails}
+                                    primary={
+                                        <Amount
+                                            value={account.amount}
+                                            baseCurrency={"$"}
+                                        />
+                                    }
+                                />
+                            </ListItemSecondaryAction>
+                        </ListItem>
+                        <Divider />
+                    </Fragment>
+                ))}
             </List>
         </div>
     );
