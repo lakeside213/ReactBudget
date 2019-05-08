@@ -1,4 +1,9 @@
-import { FETCH_USER, CREATE_ACCOUNT, SET_BASE_CURRENCY } from "../utils/types";
+import {
+    FETCH_USER,
+    CREATE_ACCOUNT,
+    SET_BASE_CURRENCY,
+    DELETE_ACCOUNT
+} from "../utils/types";
 
 const INITIAL_STATE = {
     baseCurrency: {
@@ -36,12 +41,25 @@ export default function(state = INITIAL_STATE, action) {
                         amount: parseInt(action.amount, 10),
                         cumulativeInflow: 0,
                         cumulativeOutflow: 0,
-                        isPartAssets: true,
                         createdAt: Date.now()
                     }
                 ]
             };
         }
+        case DELETE_ACCOUNT: {
+            const accountsCopy = [...state.accounts];
+            const indexTodelete = accountsCopy.findIndex(function(account) {
+                return account.id === action.id;
+            });
+            return {
+                ...state,
+                accounts: [
+                    ...accountsCopy.slice(0, indexTodelete),
+                    ...accountsCopy.slice(indexTodelete + 1)
+                ]
+            };
+        }
+
         default:
             return state;
     }

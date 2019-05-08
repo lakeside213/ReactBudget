@@ -40,7 +40,7 @@ function SimpleList(props) {
                             className={classes.transDetails}
                             primary={
                                 <Typography variant="h6">
-                                    <Amount value={assets} baseCurrency={"$"} />
+                                    <Amount value={assets} />
                                 </Typography>
                             }
                         />
@@ -56,11 +56,7 @@ function SimpleList(props) {
                             className={classes.transDetails}
                             primary={
                                 <Typography variant="h6">
-                                    <Amount
-                                        value={assets}
-                                        baseCurrency={"$"}
-                                        color={GREEN}
-                                    />
+                                    <Amount value={assets} color={GREEN} />
                                 </Typography>
                             }
                         />

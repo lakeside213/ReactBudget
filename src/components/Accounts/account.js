@@ -21,17 +21,11 @@ const styles = theme => ({
     },
     transDetails: {
         textAlign: "right"
-    },
-    cashIn: {
-        color: "#58a05b"
-    },
-    cashOut: {
-        color: "#e60000"
     }
 });
 
 function SimpleList(props) {
-    const { classes, name, data } = props;
+    const { classes, name, data, handleOpenAccount } = props;
     let total = 0;
     data.forEach(function(account) {
         total = total + account.amount;
@@ -47,20 +41,19 @@ function SimpleList(props) {
                     <ListItemSecondaryAction>
                         <ListItemText
                             className={classes.transDetails}
-                            primary={
-                                <Amount
-                                    value={total}
-                                    baseCurrency={"$"}
-                                    color={GREEN}
-                                />
-                            }
+                            primary={<Amount value={total} color={GREEN} />}
                         />
                     </ListItemSecondaryAction>
                 </ListItem>
                 <Divider />
                 {data.map(account => (
                     <Fragment>
-                        <ListItem button>
+                        <ListItem
+                            button
+                            onClick={() => {
+                                handleOpenAccount(account);
+                            }}
+                        >
                             <ListItemText
                                 primary={
                                     <Typography variant="subtitle1">
@@ -71,12 +64,7 @@ function SimpleList(props) {
                             <ListItemSecondaryAction>
                                 <ListItemText
                                     className={classes.transDetails}
-                                    primary={
-                                        <Amount
-                                            value={account.amount}
-                                            baseCurrency={"$"}
-                                        />
-                                    }
+                                    primary={<Amount value={account.amount} />}
                                 />
                             </ListItemSecondaryAction>
                         </ListItem>

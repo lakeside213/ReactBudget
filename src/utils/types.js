@@ -3,3 +3,5 @@ export const CLOSE_DIALOG = "CLOSE_DIALOG";
 export const FETCH_USER = "FETCH_USER";
 export const CREATE_ACCOUNT = "CREATE_ACCOUNT";
 export const SET_BASE_CURRENCY = "SET_BASE_CURRENCY";
+export const VIEW_ACCOUNT = "VIEW_ACCOUNT";
+export const DELETE_ACCOUNT = "DELETE_ACCOUNT";
