@@ -23,7 +23,7 @@ export default function(state = INITIAL_STATE, action) {
             };
         }
         case CREATE_ACCOUNT: {
-            let index = state.accounts.length;
+            let index = state.accounts.length + 1;
             return {
                 ...state,
                 accounts: [
@@ -34,6 +34,9 @@ export default function(state = INITIAL_STATE, action) {
                         accountType: action.accountType,
                         notes: action.notes,
                         amount: parseInt(action.amount, 10),
+                        cumulativeInflow: 0,
+                        cumulativeOutflow: 0,
+                        isPartAssets: true,
                         createdAt: Date.now()
                     }
                 ]
