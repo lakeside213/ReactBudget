@@ -1,7 +1,10 @@
-import { FETCH_USER, CREATE_ACCOUNT } from "../utils/types";
+import { FETCH_USER, CREATE_ACCOUNT, SET_BASE_CURRENCY } from "../utils/types";
 
 const INITIAL_STATE = {
-    baseCurrency: "$",
+    baseCurrency: {
+        name: "",
+        symbol: ""
+    },
     transactions: [],
     budgets: [],
     accounts: [],
@@ -13,7 +16,13 @@ export default function(state = INITIAL_STATE, action) {
         case FETCH_USER: {
             return { ...state };
         }
-        case CREATE_ACCOUNT:
+        case SET_BASE_CURRENCY: {
+            return {
+                ...state,
+                baseCurrency: { name: action.name, symbol: action.symbol }
+            };
+        }
+        case CREATE_ACCOUNT: {
             let index = state.accounts.length;
             return {
                 ...state,
@@ -29,6 +38,7 @@ export default function(state = INITIAL_STATE, action) {
                     }
                 ]
             };
+        }
         default:
             return state;
     }

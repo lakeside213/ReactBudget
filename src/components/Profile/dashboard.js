@@ -35,7 +35,8 @@ const styles = theme => ({
 });
 
 function SimpleList(props) {
-    const { classes, dialogToggle, history } = props;
+    const { classes, openDialog, history, user } = props;
+    const { baseCurrency } = user;
     return (
         <div className={classes.root}>
             <List component="div" dense>
@@ -61,7 +62,7 @@ function SimpleList(props) {
                 <ListItem
                     button
                     onClick={() => {
-                        dialogToggle();
+                        openDialog("isBaseCurrencyOpen");
                     }}
                 >
                     <ListItemIcon>
@@ -74,7 +75,9 @@ function SimpleList(props) {
                                 Base currency
                             </Typography>
                         }
-                        secondary="Dollar($)"
+                        secondary={`${baseCurrency.name}(${
+                            baseCurrency.symbol
+                        })`}
                     />
                 </ListItem>
                 {navigator.share ? (

@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
 import NumberFormat from "react-number-format";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -33,13 +35,13 @@ function renderAmount(value, classes, color) {
     }
 }
 function Amount(props) {
-    const { classes, value, baseCurrency, color } = props;
+    const { classes, value, symbol, color } = props;
     return (
         <NumberFormat
             value={value}
             displayType={"text"}
             thousandSeparator={true}
-            prefix={baseCurrency}
+            prefix={symbol}
             renderText={value => renderAmount(value, classes, color)}
         />
     );
@@ -49,4 +51,10 @@ Amount.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Amount);
+function mapStateToProps({ user }) {
+    return { symbol: user.baseCurrency.symbol };
+}
+export default connect(
+    mapStateToProps,
+    null
+)(withStyles(styles)(Amount));

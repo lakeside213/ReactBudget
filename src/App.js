@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
+import { openDialog, closeDialog } from "./actions/dialog";
 import Wrapper from "./wrapper";
 import FullScreenDialog from "./components/utils/Dialogs/FullscreenDialog";
 import HomePage from "./components/Home";
@@ -10,6 +11,7 @@ import ProfilePage from "./components/Profile";
 import Signin from "./components/Auth/signin";
 import Signup from "./components/Auth/signup";
 import CreateAccount from "./components/Accounts/Modals/CreateAccount";
+import SelectCurrency from "./components/Profile/selectCurrency";
 const Auth = ({ routes }) => (
     <div>
         {routes.map(route => (
@@ -50,36 +52,38 @@ const routes = [
         ]
     }
 ];
-const RouteWithSubRoutes = (route, accountModalToggle, logModalToggle) => (
+const RouteWithSubRoutes = route => (
     <Route
         path={route.path}
         exact={route.exact}
-        render={props => (
-            <route.component
-                {...props}
-                accountModalToggle
-                logModalToggle
-                routes={route.routes}
-            />
-        )}
+        render={props => <route.component {...props} routes={route.routes} />}
     />
 );
 
 class App extends Component {
     state = {
-        selectedPage: "Home",
-        isAccountModalOpen: false,
-        isLogTransModalOpen: false
+        selectedPage: "Home"
     };
 
     setPage = (event, selectedPage) => {
         this.setState({ selectedPage });
     };
-
+    componentDidMount() {
+        const { openDialog, user } = this.props;
+        const { baseCurrency } = user;
+        if (baseCurrency.name === "" && baseCurrency.symbol === "") {
+            openDialog("isBaseCurrencyOpen");
+        }
+    }
     render() {
         const { selectedPage } = this.state;
         const { dialog, user } = this.props;
-        const { isAccountModalOpen, isLogTransModalOpen } = dialog;
+        const { baseCurrency } = user;
+        const {
+            isAccountModalOpen,
+            isLogTransModalOpen,
+            isBaseCurrencyOpen
+        } = dialog;
         return (
             <Router basename="/">
                 <Wrapper
@@ -91,11 +95,11 @@ class App extends Component {
                         <RouteWithSubRoutes key={route.path} {...route} />
                     ))}
                 </Wrapper>
-                <FullScreenDialog
-                    isOpen={isAccountModalOpen}
-                    dialogToggle={this.accountModalToggle}
-                >
+                <FullScreenDialog isOpen={isAccountModalOpen}>
                     <CreateAccount />
+                </FullScreenDialog>
+                <FullScreenDialog isOpen={isBaseCurrencyOpen}>
+                    <SelectCurrency baseCurrency={baseCurrency} />
                 </FullScreenDialog>
             </Router>
         );
@@ -107,5 +111,5 @@ function mapStateToProps({ dialog, user }) {
 }
 export default connect(
     mapStateToProps,
-    null
+    { openDialog, closeDialog }
 )(App);

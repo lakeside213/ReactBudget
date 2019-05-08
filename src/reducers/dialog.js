@@ -1,6 +1,10 @@
 import { OPEN_DIALOG, CLOSE_DIALOG } from "../utils/types";
 
-const INITIAL_STATE = { isAccountModalOpen: false, isLogTransModalOpen: false };
+const INITIAL_STATE = {
+    isAccountModalOpen: false,
+    isLogTransModalOpen: false,
+    isBaseCurrencyOpen: false
+};
 
 export default function(state = INITIAL_STATE, action) {
     switch (action.type) {

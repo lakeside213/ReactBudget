@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
-
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { closeDialog } from "../../actions/dialog";
+import { setBaseCurrency } from "../../actions/user";
 import { withStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -110,7 +112,12 @@ class SimpleList extends Component {
 
     render() {
         const { filter, countriesData, isSearchOpen, isLoading } = this.state;
-        const { classes, setPage, dialogToggle } = this.props;
+        const {
+            classes,
+            setBaseCurrency,
+            closeDialog,
+            baseCurrency
+        } = this.props;
 
         const lowercasedFilter = filter.toLowerCase();
         const filteredData = countriesData.filter(country => {
@@ -153,15 +160,20 @@ class SimpleList extends Component {
                             </Fragment>
                         ) : (
                             <Fragment>
-                                <IconButton
-                                    color="inherit"
-                                    aria-label="Close"
-                                    onClick={() => {
-                                        dialogToggle();
-                                    }}
-                                >
-                                    <CloseIcon />
-                                </IconButton>
+                                {baseCurrency.name === "" &&
+                                baseCurrency.symbol === "" ? (
+                                    ""
+                                ) : (
+                                    <IconButton
+                                        color="inherit"
+                                        aria-label="Close"
+                                        onClick={() => {
+                                            closeDialog("isBaseCurrencyOpen");
+                                        }}
+                                    >
+                                        <CloseIcon />
+                                    </IconButton>
+                                )}
                                 <Typography
                                     variant="h6"
                                     color="inherit"
@@ -190,8 +202,10 @@ class SimpleList extends Component {
                                     button
                                     className={classes.listItem}
                                     onClick={e => {
-                                        dialogToggle();
-                                        setPage(e, "Me");
+                                        setBaseCurrency(
+                                            country.currencies[0].code,
+                                            country.currencies[0].symbol
+                                        );
                                     }}
                                 >
                                     <ListItemIcon>
@@ -229,4 +243,7 @@ SimpleList.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SimpleList);
+export default connect(
+    null,
+    { closeDialog, setBaseCurrency }
+)(withStyles(styles)(SimpleList));
